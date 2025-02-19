@@ -25,7 +25,7 @@ def register_user(new_user: User,token_data=Depends(authenticate_user)):
     }
     
     users_db[new_user.username] = user
-    return user
+    return {"data":user}
 
 
 @router.get("")

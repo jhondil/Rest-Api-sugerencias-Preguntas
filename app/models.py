@@ -1,5 +1,10 @@
 from pydantic import BaseModel
-from typing import List
+from typing import Generic, TypeVar
+
+DataT = TypeVar('DataT')
+
+class ResponseData(BaseModel, Generic[DataT]):  
+    data: DataT  
 
 class QueryModel(BaseModel):
     queryAsk: str
@@ -30,5 +35,4 @@ class HistoryEntry(BaseModel):
     query: str
     suggestion: str
 
-class SuggestionResponse(BaseModel):
-    data: SuggestionResponse
+
