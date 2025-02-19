@@ -1,5 +1,3 @@
-# app/utils.py
-
 import difflib
 from app.database import suggestions
 

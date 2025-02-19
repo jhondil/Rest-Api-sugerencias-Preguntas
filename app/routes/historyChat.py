@@ -1,4 +1,3 @@
-# app/routes/historyChat.py
 
 from fastapi import APIRouter, Depends, HTTPException
 from app.database import history
