@@ -1,7 +1,8 @@
 
 from fastapi import APIRouter, Depends, HTTPException
 from app.models import User,ResponseData
-from app.auth import authenticate_user, users_db
+from app.auth import authenticate_user
+from app.database import users_db
 import uuid
 
 router = APIRouter(prefix="/users", tags=["Usuarios"])

@@ -1,24 +1,38 @@
-from typing import Union
-from app.auth import router  as auth_router
-from app.routes.suggestions import router  as suggestions_router
-from app.routes.historyChat import router  as historyChat_router
-from app.routes.questionManagement import router  as question_management
-from app.routes.users import router  as users
+import os
+import jwt
+import datetime
+from fastapi.testclient import TestClient
+from app.main import app
 
-from fastapi import FastAPI
+class TestSuggest:
+    @classmethod
+    def setup_class(cls):
+        cls.client = TestClient(app)
+        # Si no está definido en el entorno, usa un valor por defecto
+        cls.secret_key = os.getenv("SECRET_KEY") or "mysecret"
 
-def create_app():
-    app = FastAPI(title="Rest Api sugerencias Preguntas")
-    app.include_router(auth_router)
-    app.include_router(suggestions_router)
-    app.include_router(historyChat_router)
-    app.include_router(question_management)
-    app.include_router(users)
+    def get_test_token(self, role="questionUser"):
+        token = jwt.encode(
+            {
+                "sub": "userQuestion",
+                "idUser": "8aa1a5f6-680e-435d-9367-ef57bdaca5b8",
+                "role": role,
+                "exp": datetime.datetime.utcnow() + datetime.timedelta(hours=1),
+            },
+            self.secret_key,
+            algorithm="HS256",
+        )
+        return token
 
-    return app
-
-app = create_app()
-
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run("app.main:app", host="0.0.0.0", port=8000, reload=True)
+    def test_suggest(self):
+        token = self.get_test_token(role="questionUser")
+        headers = {"Authorization": f"Bearer {token}"}
+        payload = {"queryAsk": "¿Cómo cambio mi contraseña?"}
+        response = self.client.post("/suggest", json=payload, headers=headers)
+        assert response.status_code == 200
+        data = response.json()
+        # Suponiendo que la respuesta se envuelve en "data"
+        assert "data" in data
+        # Verifica que dentro de data se encuentren los campos requeridos
+        assert "queryAsk" in data["data"]
+        assert "responseSuggestion" in data["data"]

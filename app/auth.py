@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Depends, HTTPException, APIRouter
 from fastapi.security import OAuth2PasswordBearer
 from app.models import LoginRequest
+from app.database import  users_db
 
 import jwt
 import datetime
@@ -14,20 +15,6 @@ router = APIRouter()
 SECRET_KEY = os.getenv("SECRET_KEY")
 scheme_oauth2 = OAuth2PasswordBearer(tokenUrl="token")
 
-users_db = {
-    "userQuestion": {
-        "id": "8aa1a5f6-680e-435d-9367-ef57bdaca5b8",
-        "username": "userQuestion",
-        "password": "Password123!",
-        "role": "questionUser",
-    },
-    "admin": {
-        "id": "8cfd3a42-729d-493a-b38f-fea89f003d74",
-        "username": "admin",
-        "password": "PasswordAdmin",
-        "role": "admin",
-    },
-}
 
 
 def authenticate_user(token: str = Depends(scheme_oauth2)):
