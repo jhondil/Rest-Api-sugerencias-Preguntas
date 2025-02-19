@@ -1,13 +1,13 @@
 
 from fastapi import APIRouter, Depends, HTTPException
-from app.models import User
+from app.models import User,ResponseData
 from app.auth import authenticate_user, users_db
 import uuid
 
 router = APIRouter(prefix="/users", tags=["Usuarios"])
 
 
-@router.post("/register", response_model=User)
+@router.post("/register", response_model=ResponseData[User])
 def register_user(new_user: User,token_data=Depends(authenticate_user)):
     
     if token_data.get("role") != "admin":
@@ -25,7 +25,8 @@ def register_user(new_user: User,token_data=Depends(authenticate_user)):
     }
     
     users_db[new_user.username] = user
-    return {"data":user}
+    
+    return ResponseData[User](data=user)
 
 
 @router.get("")

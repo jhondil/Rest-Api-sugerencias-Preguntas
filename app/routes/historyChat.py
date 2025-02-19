@@ -8,4 +8,4 @@ router = APIRouter(prefix="/history", tags=["Historial"])
 @router.get("")
 def get_history(token_data=Depends(authenticate_user)):    
     
-    return history
+    return {"data":history}
