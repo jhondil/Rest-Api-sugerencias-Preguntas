@@ -1,7 +1,7 @@
 # app/routes/suggestions.py
 
 from fastapi import APIRouter, Depends, HTTPException
-from app.models import QueryModel, SuggestionResponse
+from app.models import QueryModel, SuggestionResponse,SuggestionResponse
 from app.auth import authenticate_user
 from app.utils import get_suggestion
 from app.database import history
@@ -17,4 +17,4 @@ def suggest(query: QueryModel, token_data=Depends(authenticate_user)):
     suggestion = get_suggestion(query.queryAsk, token_data.get("sub"))
     
     history.append({"query": query.queryAsk, "suggestion": suggestion})
-    return {"queryAsk": query.queryAsk, "responseSuggestion": suggestion}
+    return {"data":{"queryAsk": query.queryAsk, "responseSuggestion": suggestion}}

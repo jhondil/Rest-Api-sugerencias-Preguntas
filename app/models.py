@@ -29,3 +29,6 @@ class  SuggestionBaseItem(BaseModel):
 class HistoryEntry(BaseModel):
     query: str
     suggestion: str
+
+class SuggestionResponse(BaseModel):
+    data: SuggestionResponse
