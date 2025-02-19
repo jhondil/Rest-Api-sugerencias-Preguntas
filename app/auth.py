@@ -34,7 +34,7 @@ def authenticate_user(token: str = Depends(scheme_oauth2)):
         raise HTTPException(status_code=401, detail="Token inválido")
 
 
-@router.post("/token")
+@router.post("/login")
 def login(form_data: OAuth2PasswordRequestForm = Depends()):
     user = users_db.get(form_data.username)
     if not user or user["password"] != form_data.password:
