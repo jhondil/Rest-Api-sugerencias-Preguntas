@@ -39,9 +39,9 @@ def login(login_request: LoginRequest):
             "sub": login_request.username,
             "idUser": user["id"],
             "role": user["role"],
-            "exp": datetime.datetime.utcnow() + datetime.timedelta(hours=1),
+            "exp": datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(hours=1),
         },
         SECRET_KEY,
-        algorithm="HS256",
+        algorithm=os.getenv("SECRET_KEY"),
     )
     return {"access_token": token, "token_type": "bearer"}
