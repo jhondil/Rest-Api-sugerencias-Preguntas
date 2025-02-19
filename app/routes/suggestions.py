@@ -1,7 +1,7 @@
 # app/routes/suggestions.py
 
 from fastapi import APIRouter, Depends, HTTPException
-from app.models import QueryModel, SuggestionResponse, HistoryEntry
+from app.models import QueryModel, SuggestionResponse
 from app.auth import authenticate_user
 from app.utils import get_suggestion
 from app.database import history

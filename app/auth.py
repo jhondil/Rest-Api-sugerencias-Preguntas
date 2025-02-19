@@ -2,7 +2,7 @@ from fastapi import FastAPI, Depends, HTTPException, APIRouter
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 import jwt
 import datetime
-from app.models import QueryModel
+from app.models import LoginRequest
 import os
 from dotenv import load_dotenv
 
@@ -40,15 +40,15 @@ def authenticate_user(token: str = Depends(scheme_oauth2)):
 
 
 @router.post("/login")
-def login(form_data: OAuth2PasswordRequestForm = Depends()):
+def login(login_request: LoginRequest):
 
     
-    user = users_db.get(form_data.username)   
-    if not user or user["password"] != form_data.password:
+    user = users_db.get(login_request.username)   
+    if not user or user["password"] != login_request.password:
         raise HTTPException(status_code=400, detail="Credenciales incorrectas")
     token = jwt.encode(
         {
-            "sub": form_data.username,
+            "sub": login_request.username,
             "idUser": user["id"],
             "role": user["role"],
             "exp": datetime.datetime.utcnow() + datetime.timedelta(hours=1),

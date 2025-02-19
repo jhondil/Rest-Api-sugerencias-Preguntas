@@ -19,6 +19,10 @@ class Token(BaseModel):
     idUser: str
     role: str
 
+class LoginRequest(BaseModel):
+    username: str
+    password: str
+
 class  SuggestionBaseItem(BaseModel):
     question: str
     answer: str
