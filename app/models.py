@@ -15,6 +15,7 @@ class User(BaseModel):
     role: str
 
 class Token(BaseModel):
+    sub: str
     idUser: str
     role: str
 
