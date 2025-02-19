@@ -14,7 +14,7 @@ def suggest(query: QueryModel, token_data=Depends(authenticate_user)):
     if token_data.get("role") != "questionUser":
         raise HTTPException(status_code=403, detail="No tienes permisos para acceder a este endpoint")
     
-    suggestion = get_suggestion(query.queryAsk)
+    suggestion = get_suggestion(query.queryAsk, token_data.get("sub"))
     
     history.append({"query": query.queryAsk, "suggestion": suggestion})
     return {"queryAsk": query.queryAsk, "responseSuggestion": suggestion}
