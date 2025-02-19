@@ -9,7 +9,6 @@ class SuggestionResponse(BaseModel):
     responseSuggestion: str
 
 class User(BaseModel):
-    id: str
     username: str
     password: str
     role: str

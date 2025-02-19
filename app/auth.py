@@ -1,8 +1,9 @@
 from fastapi import FastAPI, Depends, HTTPException, APIRouter
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from fastapi.security import OAuth2PasswordBearer
+from app.models import LoginRequest
+
 import jwt
 import datetime
-from app.models import LoginRequest
 import os
 from dotenv import load_dotenv
 
