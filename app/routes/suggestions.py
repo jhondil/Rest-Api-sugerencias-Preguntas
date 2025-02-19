@@ -1,40 +1,22 @@
-import os
-import datetime
-import jwt
-import unittest
-from fastapi.testclient import TestClient
-from app.main import app
 
-class TestSuggestEndpoint(unittest.TestCase):
-    @classmethod
-    def setUpClass(cls):
-        cls.client = TestClient(app.main.app)
-        cls.SECRET_KEY = os.getenv("SECRET_KEY")
+from fastapi import APIRouter, Depends, HTTPException
+from app.models import QueryModel, SuggestionResponse,ResponseData  
+from app.auth import authenticate_user
+from app.utils import get_suggestion
+from app.database import history
 
-    def get_test_token(self, role="questionUser"):
-        token = jwt.encode(
-            {
-                "sub": "userQuestion",
-                "idUser": "8aa1a5f6-680e-435d-9367-ef57bdaca5b8",
-                "role": role,
-                "exp": datetime.datetime.utcnow() + datetime.timedelta(hours=1),
-            },
-            self.SECRET_KEY,
-            algorithm="HS256",
-        )
-        return token
+router = APIRouter(prefix="/suggest", tags=["Sugerencias"])
 
-    def test_suggest(self):
-        token = self.get_test_token(role="questionUser")
-        headers = {"Authorization": f"Bearer {token}"}
-        payload = {"queryAsk": "¿Cómo cambio mi contraseña?"}
-        response = self.client.post("/suggest", json=payload, headers=headers)
-        self.assertEqual(response.status_code, 200)
-        data = response.json()
-        # Verificamos que la respuesta esté envuelta en "data"
-        self.assertIn("data", data)
-        self.assertIn("queryAsk", data["data"])
-        self.assertIn("responseSuggestion", data["data"])
-
-if __name__ == '__main__':
-    unittest.main()
+@router.post("", response_model=ResponseData[SuggestionResponse])
+def suggest(query: QueryModel, token_data=Depends(authenticate_user)):
+   
+    if token_data.get("role") != "questionUser":
+        raise HTTPException(status_code=403, detail="No tienes permisos para acceder a este endpoint")
+    
+    suggestion_text = get_suggestion(query.queryAsk, token_data.get("sub"))
+    
+    suggestion = SuggestionResponse(queryAsk=query.queryAsk, responseSuggestion=suggestion_text)
+    
+    history.append({"query": query.queryAsk, "suggestion": suggestion_text})
+    
+    return ResponseData[SuggestionResponse](data=suggestion)
