@@ -28,7 +28,7 @@ class TestSuggest:
         token = self.get_test_token(role="questionUser")
         headers = {"Authorization": f"Bearer {token}"}
         payload = {"queryAsk": "¿Cómo cambio mi contraseña?"}
-        response = self.client.post("/suggest", json=payload, headers=headers)
+        response = self.client.post("api/v1/suggest", json=payload, headers=headers)
         assert response.status_code == 200
         data = response.json()       
         assert "data" in data       
