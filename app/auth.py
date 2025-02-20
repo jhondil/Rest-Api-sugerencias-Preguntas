@@ -42,6 +42,6 @@ def login(login_request: LoginRequest):
             "exp": datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(hours=1),
         },
         SECRET_KEY,
-        algorithm=os.getenv("SECRET_KEY"),
+        algorithm=os.getenv("ALGORITHM"),
     )
     return {"access_token": token, "token_type": "bearer"}

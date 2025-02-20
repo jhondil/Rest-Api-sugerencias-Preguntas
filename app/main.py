@@ -5,15 +5,17 @@ from app.routes.historyChat import router  as historyChat_router
 from app.routes.questionManagement import router  as question_management
 from app.routes.users import router  as users
 
-from fastapi import FastAPI
+from fastapi import FastAPI,APIRouter
 
 def create_app():
     app = FastAPI(title="Rest Api sugerencias Preguntas")
-    app.include_router(auth_router)
-    app.include_router(suggestions_router)
-    app.include_router(historyChat_router)
-    app.include_router(question_management)
-    app.include_router(users)
+    api_v1 = APIRouter(prefix="/api/v1")
+    api_v1.include_router(auth_router)
+    api_v1.include_router(suggestions_router)
+    api_v1.include_router(historyChat_router)
+    api_v1.include_router(question_management)
+    api_v1.include_router(users)
+    app.include_router(api_v1)
 
     return app
 
