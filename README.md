@@ -41,7 +41,7 @@ source venv/bin/activate
  ```
 
 4. **Instalar Dependencias**  
-   Asegúrate de tener Python 3.10 o superior instalado. Luego, instala las dependencias ejecutando:
+   Asegúrate de tener Python 3.10  o superior instalado (se trabajo con 3.13.2 ). Luego, instala las dependencias ejecutando:
    ```bash
    pip install -r requirements.txt
    ```
@@ -103,7 +103,7 @@ https://rest-api-sugerencias-preguntas.onrender.com/docs#/
 
 ## Tecnologías Utilizadas
 
-- **Python 3.10+**  
+- **Python 3.10+**   (se trabajo con 3.13.2 )
   Lenguaje de programación empleado para desarrollar la API y sus módulos.
 
 - **FastAPI**  
@@ -126,3 +126,25 @@ https://rest-api-sugerencias-preguntas.onrender.com/docs#/
 
 - **python-dotenv**  
   Permite cargar variables de entorno desde un archivo `.env`, ayudando a gestionar configuraciones sensibles sin exponerlas directamente en el código.
+
+
+## Recursos Adicionales
+
+Se adjuntan los siguientes archivos para facilitar las pruebas y la integración con la API:
+
+- **Postman Environment:**  
+  Archivo JSON que contiene las variables de entorno necesarias para ejecutar las peticiones (por ejemplo, la URL base, el token, etc.).  
+ 
+
+- **Postman Collection:**  
+  Archivo JSON con la colección de solicitudes predefinidas para probar todos los endpoints de la API.  
+ 
+
+### Cómo Importar en Postman
+
+1. Abre Postman y haz clic en el botón **Import** (ubicado en la esquina superior izquierda).
+2. Selecciona los archivos JSON adjuntos (uno para el Environment y otro para la Collection).
+3. Configura el Environment importado para asegurarte de que las variables (como `{{token}}` y `{{base_url}}`) se resuelvan correctamente.
+4. Ejecuta las peticiones de la Collection para probar la API.
+
+Con estos recursos, cualquier desarrollador o tester podrá integrar y probar la API de forma rápida y sencilla.

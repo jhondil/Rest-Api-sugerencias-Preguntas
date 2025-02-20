@@ -38,18 +38,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/v1/login",
-							"protocol": "http",
+							"raw": "{{urlPro}}/login",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{urlPro}}"
 							],
-							"port": "8000",
 							"path": [
-								"api",
-								"v1",
 								"login"
 							]
 						}
@@ -81,18 +74,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/v1/users/register",
-							"protocol": "http",
+							"raw": "{{urlPro}}/users/register",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{urlPro}}"
 							],
-							"port": "8000",
 							"path": [
-								"api",
-								"v1",
 								"users",
 								"register"
 							]
@@ -116,18 +102,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/v1/users",
-							"protocol": "http",
+							"raw": "{{urlPro}}/users",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{urlPro}}"
 							],
-							"port": "8000",
 							"path": [
-								"api",
-								"v1",
 								"users"
 							]
 						}
@@ -161,18 +140,11 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:8000/api/v1/suggest",
-					"protocol": "http",
+					"raw": "{{urlPro}}/suggest",
 					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
+						"{{urlPro}}"
 					],
-					"port": "8000",
 					"path": [
-						"api",
-						"v1",
 						"suggest"
 					]
 				}
@@ -195,18 +167,11 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:8000/api/v1/history",
-					"protocol": "http",
+					"raw": "{{urlPro}}/history",
 					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
+						"{{urlPro}}"
 					],
-					"port": "8000",
 					"path": [
-						"api",
-						"v1",
 						"history"
 					]
 				}
@@ -238,18 +203,11 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:8000/api/v1/questions",
-					"protocol": "http",
+					"raw": "{{urlPro}}/questions",
 					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
+						"{{urlPro}}"
 					],
-					"port": "8000",
 					"path": [
-						"api",
-						"v1",
 						"questions"
 					]
 				}
