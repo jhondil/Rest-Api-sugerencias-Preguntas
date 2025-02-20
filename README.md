@@ -50,12 +50,12 @@ source venv/bin/activate
    Cambia el archivo .env-example a .env en la raíz del proyecto y configura las variables
  ```bash
    SECRET_KEY =
-    ALGORITHM = 
+   ALGORITHM = 
    ```
 
 6. **Ejecutar la Aplicación**
-Para correr la aplicación en modo desarrollo , ejecuta:
-   ```bash
+  Para correr la aplicación en modo desarrollo , ejecuta:
+```bash
    fastapi dev ./app/main.py
 ```
 
@@ -78,14 +78,13 @@ Password: Password123!
 
 ## Docker
 Si prefieres usar Docker:
-   ```bash
+```bash
    docker build -t mi_api_sugerencias .
 ```
 
 Ejecuta el contenedor:
-   ```bash
+```bash
    docker run -d -p 8000:8000 mi_api_sugerencias
-
 ```
 La API estará disponible en:
 http://localhost:8000/api/v1
