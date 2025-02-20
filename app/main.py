@@ -4,6 +4,7 @@ from app.routes.suggestions import router  as suggestions_router
 from app.routes.historyChat import router  as historyChat_router
 from app.routes.questionManagement import router  as question_management
 from app.routes.users import router  as users
+import uvicorn
 
 from fastapi import FastAPI,APIRouter
 
@@ -22,5 +23,5 @@ def create_app():
 app = create_app()
 
 if __name__ == "__main__":
-    import uvicorn
+   
     uvicorn.run("app.main:app", host="0.0.0.0", port=8000, reload=True)

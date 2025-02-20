@@ -12,7 +12,7 @@ router = APIRouter(prefix="/users", tags=["Usuarios"])
 def register_user(new_user: User,token_data=Depends(authenticate_user)):
     
     if token_data.get("role") != "admin":
-        raise HTTPException(status_code=403, detail="No tienes permisos para gestionar las preguntas")
+        raise HTTPException(status_code=403, detail="No tienes permisos para gestionar usuarios")
 
     if new_user.username in users_db:
         raise HTTPException(status_code=400, detail="El usuario ya existe")
@@ -34,7 +34,7 @@ def register_user(new_user: User,token_data=Depends(authenticate_user)):
 def get_users(token_data=Depends(authenticate_user)):
 
     if token_data.get("role") != "admin":
-        raise HTTPException(status_code=403, detail="No tienes permisos para gestionar las preguntas")
+        raise HTTPException(status_code=403, detail="No tienes permisos para gestionar Usuarios")
 
     return {"data":users_db}
 

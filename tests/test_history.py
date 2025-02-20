@@ -7,8 +7,7 @@ from app.main import app
 class TestSuggest:
     @classmethod
     def setup_class(cls):
-        cls.client = TestClient(app)
-       
+        cls.client = TestClient(app)       
         cls.secret_key = os.getenv("SECRET_KEY") 
 
     def get_test_token(self, role="questionUser"):
